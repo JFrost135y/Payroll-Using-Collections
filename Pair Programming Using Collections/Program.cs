@@ -11,7 +11,10 @@ namespace Pair_Programming_Using_Collections
     {
         static void Main(string[] args)
         {
+            // Sets the console window size to fit the default information
+            Console.SetWindowSize(143, 27);
 
+            // Creates a new list of 10 employees
             List<Employee> employees = new List<Employee>();
             employees.Add(new Employee(223445, "John Landry", 15.00, 35.5));
             employees.Add(new Employee(223476, "Angela Rush", 15.00, 32.25));
@@ -24,32 +27,31 @@ namespace Pair_Programming_Using_Collections
             employees.Add(new Employee(223542, "Gary Cooper", 15.35, 37.25));
             employees.Add(new Employee(223558, "Mary Millicent", 15.75, 40));
 
-            
-
+            // Writes out the employee information to the screen
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"EmployeeID:     Employee Name:        Rate of Pay:     Hours Worked:            Regular Pay:           Overtime Pay:         Pay Total:");
-
+            Console.ResetColor();
+            Console.WriteLine();
             foreach (var item in employees)
             {
-               
                 Console.WriteLine
                     (
-                    $"{item.EmployeeID,10 }"           +          
-                    $"{item.EmployeeName, 18}"         +    
-                    $"{item.RateofPay, 18:C}"          +     
-                    $"{item.HoursWorked, 22}"          +   
-                    $"{item.calculateRegPay(), 20:C}"  + 
-                    $"{item.calculateOvertime(), 23:C}"+ 
-                    $"{item.calculatepay(item.RateofPay, item.HoursWorked),22:C}"
+                    $"{item.EmployeeID,10 }" +
+                    $"{item.EmployeeName,19}" +
+                    $"{item.RateofPay,20:C}" +
+                    $"{item.HoursWorked,18}" +
+                    $"{item.CalculateRegPay(),24:C}" +
+                    $"{item.CalculateOvertime(),24:C}" +
+                    $"{item.CalculatePay(item.RateofPay, item.HoursWorked),19:C}"
                     );
-                
             }
-            Console.WriteLine($"\nRegular pay total:{Employee.RegularPayTotal:C}\n");
-            Console.WriteLine($"\nOvertime total:{Employee.OverTimeTotal:C}\n");
-            Console.WriteLine($"\nGrandtotal:{Employee.Grandtotal:C}\n");
+
+            // Writes out the pay totals
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine($"\n\nRegular pay total: {Employee.RegularPayTotal:C}\n");
+            Console.WriteLine($"\nOvertime total: {Employee.OverTimeTotal:C}\n");
+            Console.WriteLine($"\nGrand Total: {Employee.Grandtotal:C}\n");
+            Console.ResetColor();
         }
-
-
-   
-  
     }
 }
