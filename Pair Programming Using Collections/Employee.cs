@@ -8,11 +8,13 @@ namespace Pair_Programming_Using_Collections
 {
     public class Employee
     {
+        // Employee properties
         public int EmployeeID { get; set; }
         public string EmployeeName { get; set; }
         public double RateofPay { get; set; }
         public double HoursWorked { get; set; }
 
+        // This constructor takes every property value as a parameter
         public Employee(int EmpID, string EmpName, double ROPay, double Hours)
         {
             EmployeeID = EmpID;
@@ -20,68 +22,62 @@ namespace Pair_Programming_Using_Collections
             RateofPay = ROPay;
             HoursWorked = Hours;
         }
+
+        // Declare total pay variables
         public static double RegularPayTotal = 0;
         public static double OverTimeTotal = 0;
         public static double Grandtotal = 0;
 
+        // Returns total of an employee's regular pay
+        public double CalculateRegPay()
+        {
+            double regPay = 0;
+            if (HoursWorked <= 40)
+            {
+                regPay = (HoursWorked * RateofPay);
+                return regPay;
+            }
+            else
+            {
+                regPay = (40 * RateofPay);
+                return regPay;
+            }
+        }
 
-        public double calculateRegPay()
+        // Returns total of
+        public double CalculateOvertime()
+        {
+            double overtime = 0;
+            if (HoursWorked > 40)
+            {
+                overtime = (HoursWorked - 40) * (RateofPay * 1.5);
+                return overtime;
+            }
+            else
+            {
+                return overtime;
+            }
+        }
+
+        public double CalculatePay(double RateofPay, double HoursWorked)
         {
             if (HoursWorked <= 40)
             {
-                double RegPay = (HoursWorked * RateofPay);
+                double RegPay = RateofPay * HoursWorked;
+                Grandtotal += RegPay;
+                RegularPayTotal += RegPay;
                 return RegPay;
+
             }
             else
             {
-                double RegPay = (40 * RateofPay);
-                return RegPay;
+                //calculating Employees who worked more than 40 hours
+                double OverPay = (CalculateOvertime() + (40 * RateofPay));
+                OverTimeTotal += CalculateOvertime();
+                RegularPayTotal += CalculateRegPay();
+                Grandtotal += OverPay;
+                return OverPay;
             }
-        }
-        public double calculateOvertime()
-        {
-            if (HoursWorked > 40)
-            {
-                
-                double Overtime = (HoursWorked - 40) * (RateofPay * 1.5);
-                return Overtime;
-            }
-            else
-            {
-                double Overtime = 0;
-                return Overtime;
-            }
-        }
-
-
-        public double calculatepay(double RateofPay, double HoursWorked)
-        {
-            
-            
-
-                if (HoursWorked <= 40)
-                {
-                    double RegPay = RateofPay * HoursWorked;
-                    //Console.WriteLine($"\nEmployee Worked: {HoursWorked} and needs to get paid {RegPay:C}");
-                    Grandtotal += RegPay;
-                    RegularPayTotal += RegPay;
-                    return RegPay;
-
-                }
-
-                else
-                {
-                    //calculating Employees who worked more than 40 hours
-                    double OverPay = (calculateOvertime() + (40 * RateofPay));
-                    //Console.WriteLine($"\nEmployee Worked: {HoursWorked} and needs to get paid {OverPay:C}");
-                    OverTimeTotal += calculateOvertime();
-                    RegularPayTotal += calculateRegPay();
-                    Grandtotal += OverPay;
-                    
-                    return OverPay;
-                }
-               
-            
         }
 
     }
